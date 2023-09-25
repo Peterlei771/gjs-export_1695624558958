@@ -9,7 +9,85 @@
                 <meta name="robots" content="index,follow">
                 <link rel="stylesheet" href="./css/style.css">
               </head>
-              <body id="icp6mq"><div class="navbar" id="icwkp"><div class="navbar-container" data-gjs="navbar"><a class="navbar-brand" href="/"></a><div class="navbar-burger" id="iawb5"><div class="navbar-burger-line"></div><div class="navbar-burger-line"></div><div class="navbar-burger-line"></div></div><div class="navbar-items-c" data-gjs="navbar-items"><nav class="navbar-menu"><a id="ieyli" href="" class="navbar-menu-link">Home</a><a class="navbar-menu-link" id="i8whk">About</a><a class="navbar-menu-link" id="i430b">Contact</a></nav></div></div></div><div class="gjs-grid-row" id="il3k"><div class="gjs-grid-column" id="io2n"><div class="gjs-grid-row" id="ie5z"><div class="gjs-grid-column" id="ihe9g"><div class="gjs-grid-row" id="idmlt"><div class="gjs-grid-column" id="izv0l"><div id="i42ll">Paper<br/></div><div id="track_paper">MASK</div></div></div></div></div><div class="gjs-grid-row" id="ir11u"><div class="gjs-grid-column" id="ivjro"><a class="gjs-link-box" id="ienvw"><a class="gjs-link" id="inyik">Link</a></a></div></div></div></div></body>
+              <body id="icp6mq"><div class="navbar" id="icwkp"><div class="navbar-container" data-gjs="navbar"><a class="navbar-brand" href="/"></a><div class="navbar-burger" id="iawb5"><div class="navbar-burger-line"></div><div class="navbar-burger-line"></div><div class="navbar-burger-line"></div></div><div class="navbar-items-c" data-gjs="navbar-items"><nav class="navbar-menu"><a id="ieyli" href="" class="navbar-menu-link">Home</a><a class="navbar-menu-link" id="i8whk">About</a><a class="navbar-menu-link" id="i430b">Contact</a></nav></div></div></div><div class="gjs-grid-row" id="il3k"><div class="gjs-grid-column" id="io2n"><div class="gjs-grid-row" id="ie5z"><div class="gjs-grid-column" id="ihe9g"><div class="gjs-grid-row" id="idmlt"><div class="gjs-grid-column" id="izv0l"><div id="i42ll">Paper<br/></div><div id="track_paper">MASK</div></div></div></div></div><div class="gjs-grid-row" id="ir11u"><div class="gjs-grid-column" id="ivjro"><a class="gjs-link-box" id="ienvw"><a class="gjs-link" id="inyik">Link</a></a></div></div></div></div>
+
+<script src = "https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+        //user name input
+        var username = prompt("请输入您的ID：");
+        
+        // define database url
+        var dta_url = "【后端网址】/get_mousedata";
+        
+        // page log
+        $.getJSON(
+          dta_url,
+          {username: username,
+          timeMark: Date.now(),
+          objname: window.location.pathname,
+          action: "landing",
+          x: 0,
+          y: 0 })
+                 
+        // mouse enter detection
+        $('*[id^=tracks]:visible').each(function(){
+            $(this).mouseenter(function(event){
+                $.getJSON(
+                  dta_url,
+                  {username: username,
+                  timeMark: Date.now(),
+                  objname: this.id,
+                  action: "mouseenter",
+                  x: event.originalEvent.x,
+                  y: event.originalEvent.x })
+            });
+        });
+        
+        // mouse leave detection
+        $('*[id^=tracks]:visible').each(function(){
+            $(this).mouseleave(function(event){
+                $.getJSON(
+                  dta_url,
+                  {username: username,
+                  timeMark: Date.now(),
+                  objname: this.id,
+                  action: "mouseleave",
+                  x: event.originalEvent.x,
+                  y: event.originalEvent.x })
+            });
+        });
+
+        // mouse up detection
+        $('*[id^=tracks]:visible').each(function(){
+            $(this).mouseup(function(event){
+                $.getJSON(
+                  dta_url ,
+                  {username: username,
+                  timeMark: Date.now(),
+                  objname: this.id,
+                  action: "mouseup",
+                  x: event.originalEvent.x,
+                  y: event.originalEvent.x })
+            });
+        });
+
+        // mouse down detection
+        $('*[id^=tracks]:visible').each(function(){
+            $(this).mousedown(function(event){
+                $.getJSON(
+                  dta_url ,
+                  {username: username,
+                  timeMark: Date.now(),
+                  objname: this.id,
+                  action: "mousedown",
+                  x: event.originalEvent.x,
+                  y: event.originalEvent.x })
+            });
+        });
+
+        </script>
+</body>
+
             </html>
 
 
